@@ -5,8 +5,10 @@ import 'package:cop/models/lesson_model.dart';
 import 'package:cop/view/main/lesson_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../components/mdecoratons.dart';
 import '../../components/my_component.dart';
+import '../../constant/adress.dart';
 import '../../controller/home_screen_controller.dart';
 
 class MainScreen extends StatefulWidget {
@@ -62,6 +64,142 @@ class MainScreenAppbarFull extends StatelessWidget {
         drawer: Container(
           decoration: MyDecorations.backgradient,
           width: Get.width / 2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    height: Get.height / 5,
+                    child: Image.asset(
+                      Myaddress.amirkabirpath,
+                    ),
+                  )),
+
+              // فاصله بعد از لوگو
+              const Padding(
+                padding: EdgeInsets.fromLTRB(35, 10, 35, 10),
+                child: Divider(
+                  height: 10,
+                  color: Colors.white70,
+                ),
+              ),
+              InkWell(
+                  onTap: () async {
+                        const String telegramUrlScheme = 'tg://resolve?domain=mechanicshora';
+                    const url = 'https://t.me/mechanicshora';
+                    if (await canLaunchUrl(Uri.parse(telegramUrlScheme))) {
+                      await launchUrl(Uri.parse(telegramUrlScheme));
+                    } else {
+                      await launchUrl(Uri.parse(url));
+                    }
+                  },
+                  child: Container(
+                      child: const Text(
+                    MyStrings.drawertext1,
+                    style: TextStyle(color: Colors.white, fontFamily: 'Dana'),
+                  ))),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(35, 10, 35, 10),
+                child: Divider(
+                  height: 10,
+                  color: Colors.white70,
+                ),
+              ),
+              InkWell(
+                  onTap: () async {
+                    const url = 'https://autt.ir';
+                      await launchUrl(Uri.parse(url));
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  child: Container(
+                      child: const Text(
+                    MyStrings.drawertext2,
+                    style: TextStyle(color: Colors.white, fontFamily: 'Dana'),
+                  ))),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(35, 10, 35, 10),
+                child: Divider(
+                  height: 10,
+                  color: Colors.white70,
+                ),
+              ),
+              InkWell(
+                  onTap: () async{
+                        const String telegramUrlScheme = 'tg://resolve?domain=moooooooob';
+                    const url = 'https://t.me/moooooooob';
+                    if (await canLaunchUrl(Uri.parse(telegramUrlScheme))) {
+                      await launchUrl(Uri.parse(telegramUrlScheme));
+                    } else {
+                      await launchUrl(Uri.parse(url));
+                    }
+                  },
+                  child: Container(
+                      child: const Text(
+                    MyStrings.drawertext3,
+                    style: TextStyle(color: Colors.white, fontFamily: 'Dana'),
+                  ))),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(35, 10, 35, 10),
+                child: Divider(
+                  height: 10,
+                  color: Colors.white70,
+                ),
+              ),
+              InkWell(
+                  onTap: () async {
+                        const String telegramUrlScheme = 'tg://resolve?domain=mechshoraa';
+                    const url = 'https://t.me/mechshoraa';
+                    if (await canLaunchUrl(Uri.parse(telegramUrlScheme))) {
+                      await launchUrl(Uri.parse(telegramUrlScheme));
+                    } else {
+                      await launchUrl(Uri.parse(url));
+                    }
+                  },
+                  child: Container(
+                      child: const Text(
+                    MyStrings.drawertext4,
+                    style: TextStyle(color: Colors.white, fontFamily: 'Dana'),
+                  ))), const Padding(
+                padding: EdgeInsets.fromLTRB(35, 10, 35, 10),
+                child: Divider(
+                  height: 10,
+                  color: Colors.white70,
+                ),
+              ),
+              InkWell(
+                  onTap: () async {
+                    const url = 'https://github.com/mobinnet3000/cop';
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await launchUrl(Uri.parse(url));
+                    } else {
+                      await launchUrl(Uri.parse(url));
+                    }
+                  },
+                  child: Container(
+                      child: const Text(
+                    'OPEN SOURCE COMMUNITY',
+                    style: TextStyle(color: Colors.white, fontFamily: 'Dana'),
+                  ))),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(35, 10, 35, 10),
+                child: Divider(
+                  height: 10,
+                  color: Colors.white70,
+                ),
+              ),
+              InkWell(
+                  onTap: () {},
+                  child: Container(
+                      child: const Text(
+                    "V.1.0",
+                    style: TextStyle(color: Colors.white, fontFamily: 'Dana'),
+                  )))
+            ],
+          ),
         ),
         // تعریف اپبار بالا صفحه
         appBar: AppBar(

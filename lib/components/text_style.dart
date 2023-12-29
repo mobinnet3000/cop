@@ -23,6 +23,10 @@ TextStyle mediomtext = TextStyle(
   fontFamily: 'Dana',
   fontSize: Dimens.medium,
   fontWeight: FontWeight.w200,
+);TextStyle mediomtext1 = TextStyle(
+  fontFamily: 'Dana',
+  fontSize: Dimens.medium,
+  fontWeight: FontWeight.w600,
 );TextStyle smalltext = TextStyle(
   fontFamily: 'Dana',
   fontSize: Dimens.small,

@@ -2,6 +2,10 @@ class MyStrings {
   static const String projectshortname = 'COP';
   static const String owner = 'شورا صنفی دانشکده مکانیک';
   static const String projectfultname = 'Competition of professors';
+  static const String drawertext1 = 'شورای صنفی دانشکده مکانیک';
+  static const String drawertext2 = 'سایت برنامه ریزی انتخاب واحد';
+  static const String drawertext3 = 'ارتباط با سازنده';
+  static const String drawertext4 = 'پشتابانی';
   static const String projectfultnamepr = 'مسابقه اساتید';
   static const String rateprof = 'این بار تو به استادت نمره بده';
   static const String facs1 = 'جذابیت تدریس';

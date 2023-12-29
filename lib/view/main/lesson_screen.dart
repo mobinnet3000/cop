@@ -3,6 +3,7 @@ import 'package:cop/controller/lessonscreen_controller.dart';
 import 'package:cop/view/rate/rate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../components/dimens.dart';
 import '../../components/mdecoratons.dart';
 import '../../components/text_style.dart';
@@ -30,7 +31,6 @@ class LessonScreenState extends State<LessonScreen>
   }
   @override
   Widget build(BuildContext context) {
-
     return Obx(() {
       return MainScreenAppbarFull(
         mainbody: ProfScreenAppbarFull(
@@ -205,6 +205,7 @@ class CardForEachprof extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -286,11 +287,19 @@ class CardForEachprof extends StatelessWidget {
             //پایان دیوایدر
             InkWell(
               onTap: () {
-                Get.to(RateScreen(
-                  name: name,
-                  // addres: addres,
-                  email: email,
-                ));
+
+                if ((box.read('rated') ?? []).contains(int.parse(id))) {
+                  Get.snackbar(
+              'خطا',
+              'به هر استاد یک بار امکان نمره دادن وجود دارد',
+              snackPosition: SnackPosition.TOP,);
+                } else {
+                  Get.to(RateScreen(
+                    name: name,
+                    id: id,
+                    email: email,
+                  ));
+                }
               },
               child: Padding(
                 padding: MyPadings.padingforprofcardleft,

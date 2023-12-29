@@ -1,19 +1,36 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../components/dimens.dart';
 import '../../components/mdecoratons.dart';
 import '../../components/text_style.dart';
+import '../../constant/api_constant.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/my_strings.dart';
 import '../main/main_screen.dart';
+import 'package:http/http.dart' as http;
 
+RxMap serversend = {
+    "id": 0,
+    "f1": 50.0,
+    "f2": 50.0,
+    "f3": 50.0,
+    "f4": 50.0,
+    "f5": 50.0,
+    "f6": 50.0
+}.obs;
 class RateScreen extends StatelessWidget {
   final String name;
+  final String id;
   final String email;
-  const RateScreen({super.key, required this.name, required this.email});
-
+  const RateScreen({super.key, required this.name, required this.email, required this.id});
+  
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    serversend.value['id'] = int.parse(id);
     return MainScreenAppbarFull(
         mainbody: Stack(
       children: [
@@ -98,12 +115,12 @@ class RateScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(3.0),
                     child: Column(
                       children: [
-                        Ratefac(factor: MyStrings.facs1),
-                        Ratefac(factor: MyStrings.facs2),
-                        Ratefac(factor: MyStrings.facs3),
-                        Ratefac(factor: MyStrings.facs4),
-                        Ratefac(factor: MyStrings.facs5),
-                        Ratefac(factor: MyStrings.facs6),
+                        Ratefac1(factor: MyStrings.facs1 , fn: 'f1',),
+                        Ratefac1(factor: MyStrings.facs2 , fn: 'f2',),
+                        Ratefac1(factor: MyStrings.facs3 , fn: 'f3',),
+                        Ratefac1(factor: MyStrings.facs4 , fn: 'f4',),
+                        Ratefac1(factor: MyStrings.facs5 , fn: 'f5',),
+                        Ratefac1(factor: MyStrings.facs6 , fn: 'f6',),
                       ],
                     ),
                   ),
@@ -117,7 +134,38 @@ class RateScreen extends StatelessWidget {
             left: 50,
             right: 50,
             child: InkWell(
-              onTap: () {},
+              onTap: () async{
+              print(Uri.parse(ApiUrlConstant.urlrateprofs + id));
+                final response = await http.patch(
+              Uri.parse('${ApiUrlConstant.urlrateprofs}$id/'),
+              headers: <String, String>{
+                'Content-Type': 'application/json',
+              },
+              body: jsonEncode(serversend),);
+              
+    if (response.statusCode == 200) {
+                Get.back();
+                List listdata = box.read('rated')??[];
+                listdata.add(int.parse(id));
+                box.writeIfNull("rated", listdata);
+                Get.snackbar(
+              '',
+              ' اطلاعات با موفقیت ارسال شد',
+              snackPosition: SnackPosition.TOP,
+              
+            );
+
+    }
+    else{
+Get.back();
+Get.snackbar(
+              '',
+              ' اطلاعات با موفقیت ارسال نشد',
+              snackPosition: SnackPosition.TOP,
+              
+            );
+    }
+              },
               child: Container(
                 height: Get.height / 12,
                 // width: 400,
@@ -140,9 +188,10 @@ class RateScreen extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class Ratefac extends StatelessWidget {
-  Ratefac({super.key, required this.factor});
+class Ratefac1 extends StatelessWidget {
+  Ratefac1({super.key, required this.factor, required this.fn});
   String factor;
+  String fn;
   RxDouble sliderValue = 3.0.obs;
 
   @override
@@ -187,8 +236,8 @@ class Ratefac extends StatelessWidget {
                   value: sliderValue.value,
                   onChanged: (value) {
                     // تغییر مقدار اسلایدر با دست کاربر
-
                     sliderValue.value = value;
+                    serversend.value[fn] = value*90/4-12.5;
                   },
                   min: 1,
                   max: 5,
@@ -217,4 +266,5 @@ class Ratefac extends StatelessWidget {
           ],
         ));
   }
+  
 }

@@ -62,14 +62,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 MyStrings.projectfultnamepr,
                 style: mediomtext,
               ),
+              Text(
+                MyStrings.owner,
+                style: mediomtext1,
+              ),
+              Text(
+                'لطفا از اتصال اینترنت خود اطمینان حاصل نمایید',
+                style: mediomtext,
+              ),
               Image.asset(
                 Myaddress.amirkabirpath,
                 width: Sizes.medium,
                 height: Sizes.medium,
-              ),
-              Text(
-                MyStrings.owner,
-                style: mediomtext,
               ),
             ],
           ),
