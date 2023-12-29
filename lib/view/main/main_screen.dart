@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../components/mdecoratons.dart';
 import '../../components/my_component.dart';
 import '../../controller/home_screen_controller.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
   @override
@@ -39,7 +40,8 @@ class MainScreenState extends State<MainScreen>
       } else {
         cont = TabController(
             // ignore: invalid_use_of_protected_member
-        length: homeScreenController.tabList.value.length, vsync: this);
+            length: homeScreenController.tabList.value.length,
+            vsync: this);
         return MainScreenAppbarFull(
           mainbody: MainScreenBody(
               cont: cont, homeScreenController: homeScreenController),
@@ -239,8 +241,8 @@ class CardForEachLesson extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
                     child: Container(
-                      height: (size.height / 7) - 30,
-                      width: (size.height / 7) - 30,
+                      height: (size.height / 8) - 30,
+                      width: (size.height / 8) - 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(1000),
                           color: Colors.white),
@@ -260,7 +262,7 @@ class CardForEachLesson extends StatelessWidget {
                               overflow: TextOverflow.fade,
                             )),
                         Text(cologe),
-                        Text('$vahedواحد'),
+                        Text('$vahed واحد'),
                       ],
                     ),
                   ),
@@ -270,10 +272,12 @@ class CardForEachLesson extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: size.height / 12,
-                        ),
+                        child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              size: size.height / 12,
+                            )),
                       ),
                     ],
                   ))
